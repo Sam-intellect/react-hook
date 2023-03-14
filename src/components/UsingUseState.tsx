@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import FunctionContextComponent from './FunctionContextComponent';
-export const ThemeContext = React.createContext();
+import React, { useState, useEffect, useContext } from 'react';
+import { Context } from './Context';
 
 const UsingUseState = () => {
   const [count, setCount] = useState(4);
   const [state, setState] = useState<boolean>(false);
   const [darkTheme, setDarkTheme] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const { mode, toggleMode } = useContext(Context);
 
   const incrementCount = () => {
     setCount((prevCount) => prevCount + 1);
@@ -39,11 +39,11 @@ const UsingUseState = () => {
   };
   return (
     <>
-      <ThemeContext.Provider value={darkTheme}>
-        <button onClick={toggleTheme}>Toggle Theme</button>
-        <FunctionContextComponent />
-      </ThemeContext.Provider>
-      <div className="flex mx-auto place-content-center items-center gap-5">
+      <div
+        className={`flex mx-auto place-content-center items-center gap-5 bg-${
+          mode === 'dark' ? 'gray-900' : 'gray-100'
+        } text-${mode === 'dark' ? 'white' : 'gray-800'}`}
+      >
         <button
           className="bg-black text-white text-3xl p-2 w-16 rounded-lg"
           onClick={incrementCount}
@@ -59,6 +59,7 @@ const UsingUseState = () => {
         </button>
       </div>
       <button onClick={reset}>RESET</button>
+      <button onClick={toggleMode}>Toggle Theme</button>
       {/* <button onClick={bool}>state</button> */}
       <div>{windowWidth}</div>
     </>
