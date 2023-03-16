@@ -1,16 +1,14 @@
 import { useState } from 'react';
+import Details from './components/Details';
+import IteratorTest from './components/IteratorTest';
+
 import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  const Print = () => {
-    console.log('Hello');
-  };
-
   return (
     <>
-      <button onClick={Print}>Hello</button>
+      {/* <Details /> */}
+      <IteratorTest />
     </>
   );
 }

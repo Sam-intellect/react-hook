@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useIpAddress } from './useIpAddress';
 import { BASE_URl } from '../api/config';
 
-const Details: React.FC = () => {
+const Details: React.FC = (string) => {
   const [ipAddress, setIpAddress] = useState<string>('');
 
   useEffect(() => {
@@ -11,6 +11,7 @@ const Details: React.FC = () => {
       try {
         const response = await axios.get('https://api.ipify.org/?format=json');
         const ipAddress = response.data.ip;
+        console.log(ipAddress);
         setIpAddress(ipAddress);
       } catch (error) {
         console.error(error);
@@ -24,11 +25,12 @@ const Details: React.FC = () => {
   );
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
 
   return (
     <>
-      <div></div>
+      <div>
+        <button onClick={console.log(ipAddress)}>Hello</button>
+      </div>
     </>
   );
 };
